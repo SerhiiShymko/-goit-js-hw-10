@@ -1,9 +1,7 @@
 import '../src/css/styles.css';
-import SimpleLightbox from 'simplelightbox';
-import 'simplelightbox/dist/simple-lightbox.min.css';
 import { getImages } from './js/apiClient.js';
 import throttle from 'lodash.throttle';
-// import templates from './templates/template-card.hbs';
+import { onRenderGallery } from './js/template-card.js';
 
 const galleryMarkUp = document.querySelector('#search-form');
 // const btnSearch = document.querySelector('.search');
@@ -22,7 +20,7 @@ document.querySelector('.load-more').addEventListener('click', () => {
 const fetchImages = (search, page) =>
   getImages(search, page)
     .then(response => {
-      //   renderNews(createCollection(response.articles));
+      onRenderGallery();
       updateLoadButton(page);
       updateTotal(response.totalResults);
     })
@@ -45,9 +43,3 @@ const updateLoadButton = currentPage => {
   btn.style.display = 'block';
   btn.dataset.page = Number(currentPage) + 1;
 };
-
-const lightbox = new SimpleLightbox('.photo-card a', {
-  captions: true,
-  captionsData: 'alt',
-  captionDelay: 250,
-});
