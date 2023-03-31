@@ -17,5 +17,5 @@ export const getImages = (search, page) => {
   //   }
   //   return response.json();
   // });
-  return await axios.get(`${BASE_URL}${params}`).then(response => response.data);
+  return axios.get(`${BASE_URL}${params}`).then(response => response.data);
 };
