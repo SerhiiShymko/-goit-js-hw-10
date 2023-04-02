@@ -1,5 +1,3 @@
-// import { lightbox } from './js/lightbox.js';
-
 export default function onRenderGallery(elements) {
   const markup = elements
     .map(

@@ -1,7 +1,9 @@
 import '../src/css/styles.css';
 import { getImages } from './js/apiClient.js';
 import throttle from 'lodash.throttle';
-import { onRenderGallery } from './js/template-card.js';
+import SimpleLightbox from 'simplelightbox';
+import 'simplelightbox/dist/simple-lightbox.min.css';
+import { onRenderGallery } from './js/renderGallery.js';
 
 const galleryMarkUp = document.querySelector('#search-form');
 // const btnSearch = document.querySelector('.search');
@@ -10,6 +12,11 @@ const galleryMarkUp = document.querySelector('#search-form');
 let searchState = '';
 let currentPage = 1;
 let currentHits = 0;
+let lightbox = new SimpleLightbox('.photo-card a', {
+  captions: true,
+  captionsData: 'alt',
+  captionDelay: 250,
+});
 
 document.querySelector('.load-more').addEventListener('click', () => {
   const btnLoad = document.querySelector('.load-more').dataset.page;

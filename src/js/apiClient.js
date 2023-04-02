@@ -1,14 +1,14 @@
 import axios from 'axios';
 
-export const getImages = (search, page) => {
+export const getImages = async (search, page) => {
   const BASE_URL = `https://pixabay.com/api/`;
   const params = new URLSearchParams({
-    q: search,
+    q: '${value}',
     key: '34798560-686184bc87076e66494c7fccc',
     image_type: photo,
     orientation: horizontal,
     safesearch: true,
-    page,
+    page: '${page}',
     per_page: 40,
   });
   // return fetch(`${BASE_URL}?${params}`).then(response => {
@@ -17,5 +17,7 @@ export const getImages = (search, page) => {
   //   }
   //   return response.json();
   // });
-  return axios.get(`${BASE_URL}${params}`).then(response => response.data);
+  return await axios
+    .get(`${BASE_URL}${params}`)
+    .then(response => response.data);
 };
