@@ -9,20 +9,19 @@
 </head>
 
 <body>
-  <div class="form-items">
-    <form class="search-form" id="search-form">
-      <input type="text" name="searchQuery" autocomplete="off" placeholder="Search images..." />
-      <button type="submit" class="search">Search</button>
-      <!-- <button type="button" class="load-more">Load more</button> -->
-    </form>
+  <form class="search-form" id="search-form">
+    <input type="text" name="searchQuery" autocomplete="off" placeholder="Search images..." />
+    <button type="submit" class="search">Search</button>
+  </form>
+
+  <div class="gallery">
+    <!-- Картки зображень -->
   </div>
-  <div class="container">
-    <div class="gallery"></div>
-    <button type="button" class="load-more is-hidden">Load more</button>
-    <p class="end-collection-text is-hidden">
-      We're sorry, but you've reached the end of search results.
-    </p>
-  </div>
+
+  <button type="button" class="load-more is-hidden">Load more</button>
+  <p class="text-Collections is-hidden">
+    We're sorry, but you've reached the end of search results.
+  </p>
   <script src="index.js" type="module"></script>
 </body>
 
