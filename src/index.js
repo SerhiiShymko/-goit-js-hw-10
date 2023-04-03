@@ -1,4 +1,4 @@
-import '../src/css/styles.css';
+import './sass/main.scss';
 import { getImages } from './js/apiClient.js';
 import throttle from 'lodash.throttle';
 import SimpleLightbox from 'simplelightbox';
@@ -6,6 +6,7 @@ import 'simplelightbox/dist/simple-lightbox.min.css';
 import { onRenderGallery } from './js/renderGallery.js';
 
 const galleryMarkUp = document.querySelector('#search-form');
+const galleryContainer = document.querySelector('.gallery');
 // const btnSearch = document.querySelector('.search');
 // const btnLoad = document.querySelector('.load-more');
 
