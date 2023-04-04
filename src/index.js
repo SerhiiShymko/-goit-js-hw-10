@@ -1,10 +1,9 @@
 import './sass/main.scss';
 import { getImages } from './js/apiClient.js';
-import throttle from 'lodash.throttle';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import SimpleLightbox from 'simplelightbox';
 import 'simplelightbox/dist/simple-lightbox.min.css';
-import { onRenderGallery } from './js/renderGallery.js';
+// import { onRenderGallery } from './js/renderGallery.js';
 
 const refs = {
   form: document.querySelector('.search-form'),
@@ -24,6 +23,48 @@ let lightbox = new SimpleLightbox('.photo-card a', {
   captionDelay: 250,
 });
 // const perPage = 40;
+
+function onRenderGallery(elements) {
+  const markup = elements
+    .map(
+      ({
+        webformatURL,
+        largeImageURL,
+        tags,
+        likes,
+        views,
+        comments,
+        downloads,
+      }) => {
+        return `<div class="photo-card">
+    <a href="${largeImageURL}">
+      <img class="photo-img" src="${webformatURL}" alt="${tags}" loading="lazy" />
+    </a>
+    <div class="info">
+      <p class="info-item">
+        <b>Likes</b>
+        ${likes}
+      </p>
+      <p class="info-item">
+        <b>Views</b>
+        ${views}
+      </p>
+      <p class="info-item">
+        <b>Comments</b>
+        ${comments}
+      </p>
+      <p class="info-item">
+        <b>Downloads</b>
+        ${downloads}
+      </p>
+    </div>
+    </div>`;
+      }
+    )
+    .join('');
+  refs.galleryItems.insertAdjacentHTML('beforeend', markup);
+  lightbox.refresh();
+}
 
 refs.form.addEventListener('submit', submitSearchForm);
 
@@ -90,6 +131,8 @@ async function clickBtnLoad() {
     refs.textCollections.classList.remove('is-hidden');
   }
 }
+
+////////////////////////////////////////////////////////////////
 // const fetchImages = (searchQuery, currentPage) =>
 //   getImages(searchQuery, currentPage)
 //     .then(response => {
@@ -116,3 +159,4 @@ async function clickBtnLoad() {
 //   btn.style.display = 'block';
 //   btn.dataset.page = Number(currentPage) + 1;
 // };
+/////////////////////////////////////////////////////////////////

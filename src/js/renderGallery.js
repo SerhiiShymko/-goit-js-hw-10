@@ -36,6 +36,6 @@ export function onRenderGallery(elements) {
       }
     )
     .join('');
-  galleryItems.insertAdjacentHTML('beforeend', markup);
+  refs.galleryItems.insertAdjacentHTML('beforeend', markup);
   lightbox.refresh();
 }
