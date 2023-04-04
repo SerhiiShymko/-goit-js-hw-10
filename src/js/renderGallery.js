@@ -1,3 +1,10 @@
+import SimpleLightbox from 'simplelightbox';
+import 'simplelightbox/dist/simple-lightbox.min.css';
+
+const refs = {
+  galleryItems: document.querySelector('.gallery'),
+};
+
 function onRenderGallery(elements) {
   const markup = elements
     .map(
@@ -37,7 +44,6 @@ function onRenderGallery(elements) {
     )
     .join('');
   refs.galleryItems.insertAdjacentHTML('beforeend', markup);
-  lightbox.refresh();
 }
 
-export { onRenderGallery, markup };
+export { onRenderGallery };
