@@ -1,4 +1,4 @@
-export function onRenderGallery(elements) {
+function onRenderGallery(elements) {
   const markup = elements
     .map(
       ({
@@ -39,3 +39,5 @@ export function onRenderGallery(elements) {
   refs.galleryItems.insertAdjacentHTML('beforeend', markup);
   lightbox.refresh();
 }
+
+export { onRenderGallery, markup };

@@ -3,7 +3,7 @@ import { getImages } from './js/apiClient.js';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import SimpleLightbox from 'simplelightbox';
 import 'simplelightbox/dist/simple-lightbox.min.css';
-// import { onRenderGallery } from './js/renderGallery.js';
+// import { onRenderGallery, markup } from './js/renderGallery.js';
 
 const refs = {
   form: document.querySelector('.search-form'),
@@ -66,7 +66,7 @@ function onRenderGallery(elements) {
   lightbox.refresh();
 }
 
-refs.form.addEventListener('submit', submitSearchForm);
+refs.form.addEventListener('input', submitSearchForm);
 
 async function submitSearchForm(event) {
   event.preventDefault();
