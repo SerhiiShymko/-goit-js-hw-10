@@ -23,48 +23,6 @@ let lightbox = new SimpleLightbox('.photo-card a', {
   captionDelay: 250,
 });
 
-// function onRenderGallery(elements) {
-//   const markup = elements
-//     .map(
-//       ({
-//         webformatURL,
-//         largeImageURL,
-//         tags,
-//         likes,
-//         views,
-//         comments,
-//         downloads,
-//       }) => {
-//         return `<div class="photo-card">
-//     <a href="${largeImageURL}">
-//       <img class="photo-img" src="${webformatURL}" alt="${tags}" loading="lazy" />
-//     </a>
-//     <div class="info">
-//       <p class="info-item">
-//         <b>Likes</b>
-//         ${likes}
-//       </p>
-//       <p class="info-item">
-//         <b>Views</b>
-//         ${views}
-//       </p>
-//       <p class="info-item">
-//         <b>Comments</b>
-//         ${comments}
-//       </p>
-//       <p class="info-item">
-//         <b>Downloads</b>
-//         ${downloads}
-//       </p>
-//     </div>
-//     </div>`;
-//       }
-//     )
-//     .join('');
-//   refs.galleryItems.insertAdjacentHTML('beforeend', markup);
-//   lightbox.refresh();
-// }
-
 refs.form.addEventListener('submit', submitSearchForm);
 
 async function submitSearchForm(event) {
@@ -93,15 +51,6 @@ async function submitSearchForm(event) {
       onRenderGallery(response.hits);
       lightbox.refresh();
       refs.textCollections.classList.add('is-hidden');
-
-      const { height: cardHeight } = document
-        .querySelector('.gallery')
-        .firstElementChild.getBoundingClientRect();
-
-      window.scrollBy({
-        top: cardHeight * -100,
-        behavior: 'smooth',
-      });
     }
     if (response.totalHits === 0) {
       refs.galleryItems.innerHTML = '';
@@ -112,7 +61,7 @@ async function submitSearchForm(event) {
       refs.textCollections.classList.add('is-hidden');
     }
   } catch (error) {
-    console.error(error);
+    console.log(error);
   }
 }
 
@@ -125,37 +74,17 @@ async function clickBtnLoad() {
   lightbox.refresh();
   currentHits += response.hits.length;
 
+  const { height: cardHeight } = document
+    .querySelector('.gallery')
+    .firstElementChild.getBoundingClientRect();
+
+  window.scrollBy({
+    top: cardHeight * 2,
+    behavior: 'smooth',
+  });
+
   if (currentHits === response.totalHits) {
     refs.btnLoad.classList.add('is-hidden');
     refs.textCollections.classList.remove('is-hidden');
   }
 }
-
-////////////////////////////////////////////////////////////////
-// const fetchImages = (searchQuery, currentPage) =>
-//   getImages(searchQuery, currentPage)
-//     .then(response => {
-//       onRenderGallery();
-//       updateLoadButton(currentPage);
-//       updateTotal(response.totalResults);
-//     })
-//     .catch(e => console.log(e));
-
-// const updateTotal = totalHits => {
-//   let el = document.querySelector('.total');
-//   if (!el) {
-//     el = document.createElement('label');
-//     el.classList.add('total');
-//     const container = document.querySelector('.search-form');
-//     container.append(el);
-//   }
-
-//   el.textContent = `Total articles: ${totalHits}`;
-// };
-
-// const updateLoadButton = currentPage => {
-//   const btnLoad = document.querySelector('.load-more');
-//   btn.style.display = 'block';
-//   btn.dataset.page = Number(currentPage) + 1;
-// };
-/////////////////////////////////////////////////////////////////
